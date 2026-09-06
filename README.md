@@ -1,5 +1,8 @@
 # LLaDA-Image Turbo for ComfyUI
 
+
+## UPDATE! made optimizations to speed up gen time. 
+
 Custom ComfyUI nodes for **LLaDA-Image-Turbo**, with support for **text-to-image generation** and **native image editing**.
 
 This project is built around the official LLaDA-Image-Turbo model from inclusionAI and adds a ComfyUI pipeline designed to run the model with RebelAI's optimized weights.
