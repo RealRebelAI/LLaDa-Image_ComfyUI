@@ -395,6 +395,13 @@ def load_llada2_gguf_encoder(gguf_path: str | Path, config_dir: str | Path, dtyp
     with init_empty_weights(include_buffers=True):
         model = model_cls(config)
 
+    for module in model.modules():
+        if module.__class__.__name__ == "LLaDA2MoeRotaryEmbedding":
+            inv_freq, attention_scaling = module.rope_init_fn(config, device="cpu")
+            module.register_buffer("inv_freq", inv_freq, persistent=False)
+            module.original_inv_freq = module.inv_freq
+            module.attention_scaling = attention_scaling  
+
     module_map = dict(model.named_modules())
     consumed = set()
 
